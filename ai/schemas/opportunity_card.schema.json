@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpportunityCard",
+  "type": "object",
+  "properties": {
+    "one_liner": {"type": "string"},
+    "score": {"type": "number", "minimum": 0, "maximum": 100},
+    "rationale": {"type": "string"},
+    "business_models": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "local_fit": {"type": "string"}
+        },
+        "required": ["name", "description", "local_fit"]
+      }
+    },
+    "mvp_plan": {
+      "type": "object",
+      "properties": {
+        "week_1": {"type": "array", "items": {"type": "string"}},
+        "week_2": {"type": "array", "items": {"type": "string"}},
+        "week_3": {"type": "array", "items": {"type": "string"}},
+        "week_4": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["week_1", "week_2", "week_3", "week_4"]
+    },
+    "validation_kit": {
+      "type": "object",
+      "properties": {
+        "steps": {"type": "array", "items": {"type": "string"}},
+        "survey_questions": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["steps", "survey_questions"]
+    },
+    "local_partners": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "why_match": {"type": "string"}
+        },
+        "required": ["name", "type", "why_match"]
+      }
+    },
+    "funding_matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "link": {"type": ["string", "null"]},
+          "fit_reason": {"type": "string"}
+        },
+        "required": ["name", "fit_reason"]
+      }
+    }
+  },
+  "required": ["one_liner", "score", "rationale", "business_models", "mvp_plan", "validation_kit"]
+}

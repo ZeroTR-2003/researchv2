@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "christuskirche",
+    "title": "Christuskirche, Windhoek",
+    "shortDescription": "Historic Lutheran church in the heart of Windhoek.",
+    "glbExterior": "/models/christuskirche-exterior.glb",
+    "tour360Url": "https://www.360cities.net/embed_iframe/windhoek-christuskirche?view=360&autoload=true",
+    "coords": { "lat": -22.5700, "lng": 17.0836 },
+    "gallery": [
+      "/images/christus-01.svg",
+      "/images/christus-02.svg"
+    ],
+    "facts": { "year": 1910, "type": "Church" },
+    "annotations": [
+      { "label": "Spire", "description": "Iconic sandstone spire visible across central Windhoek.", "position": [0.2, 1.4, 0] },
+      { "label": "Entrance", "description": "Main entrance on Fidel Castro St.", "position": [0, 0.1, 0.6] }
+    ]
+  },
+  {
+    "slug": "heroes-acre",
+    "title": "Heroes' Acre",
+    "shortDescription": "National war memorial honoring Namibia’s heroes.",
+    "glbExterior": "/models/heroes-acre-exterior.glb",
+    "tour360Url": "https://www.360cities.net/embed_iframe/heroes-acre-windhoek?view=360&autoload=true",
+    "coords": { "lat": -22.6692, "lng": 17.0797 },
+    "gallery": [
+      "/images/heroes-01.svg",
+      "/images/heroes-02.svg"
+    ],
+    "facts": { "year": 2002, "type": "Monument" },
+    "annotations": [
+      { "label": "Obelisk", "description": "Central obelisk marking the memorial.", "position": [0, 0.8, -0.2] }
+    ]
+  },
+  {
+    "slug": "windhoek-city-museum",
+    "title": "Windhoek City Museum",
+    "shortDescription": "Local history museum showcasing Windhoek’s heritage.",
+    "glbExterior": "/models/windhoek-city-museum-exterior.glb",
+    "tour360Url": "https://tour.panoee.net/iframe/68e2979e57effdfd21a09ccc",
+    "coords": { "lat": -22.5685, "lng": 17.0860 },
+    "gallery": [
+      "/images/museum-01.svg",
+      "/images/museum-02.svg"
+    ],
+    "facts": { "year": 1962, "type": "Museum" },
+    "annotations": [
+      { "label": "Gallery Wing", "description": "Exhibition space for rotating collections.", "position": [0.4, 0.3, 0] }
+    ]
+  }
+]

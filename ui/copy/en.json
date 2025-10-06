@@ -1,0 +1,78 @@
+{
+  "app": {
+    "name": "Problems → Opportunities (Namibia)",
+    "tagline": "Find real problems. Turn them into projects."
+  },
+  "nav": {
+    "home": "Home",
+    "browse": "Browse",
+    "submit": "Submit a problem",
+    "projects": "Projects",
+    "map": "Map",
+    "dashboard": "Dashboard",
+    "moderator": "Moderate"
+  },
+  "search": {
+    "placeholder": "Search by keyword, region or sector...",
+    "filters": {
+      "region": "Region",
+      "sector": "Sector",
+      "score_min": "Min score",
+      "year": "Year",
+      "status": "Status",
+      "verified": "Vetted only"
+    },
+    "sort": {
+      "best": "Best match",
+      "new": "Newest",
+      "score": "Highest score"
+    }
+  },
+  "statuses": {
+    "pending_review": "Pending review",
+    "needs_info": "Needs info",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "merged": "Merged",
+    "vetted": "Vetted"
+  },
+  "problem": {
+    "start_project": "Start a project",
+    "opportunity_card": "Opportunity Card",
+    "validation_kit": "Validation kit",
+    "related": "Related problems",
+    "evidence": "Evidence",
+    "contributors": "Contributors",
+    "share": "Share"
+  },
+  "project": {
+    "new_task": "New task",
+    "invite": "Invite teammate",
+    "status": {
+      "planning": "Planning",
+      "active": "Active",
+      "paused": "Paused",
+      "completed": "Completed"
+    }
+  },
+  "moderation": {
+    "queue": "Moderation queue",
+    "approve": "Approve",
+    "reject": "Reject",
+    "merge": "Merge",
+    "request_info": "Request info",
+    "automated_checks": "Automated checks",
+    "confidence": "Confidence",
+    "notes": "Notes",
+    "actions": "Actions"
+  },
+  "funding": {
+    "matches": "Funding matches",
+    "deadline": "Deadline"
+  },
+  "toasts": {
+    "saved": "Saved",
+    "error": "Something went wrong. Please try again.",
+    "copied": "Copied to clipboard"
+  }
+}

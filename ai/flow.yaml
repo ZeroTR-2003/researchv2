@@ -1,0 +1,105 @@
+version: 0.1
+name: problems-to-opportunities
+summary: End-to-end AI flow for ingest → dedupe → score → generate Opportunity Card (human-in-the-loop)
+
+steps:
+  - id: ingest_normalize
+    kind: llm
+    prompt_file: prompts/ingest_normalize.md
+    input:
+      raw_text: ${submission.description}
+      title: ${submission.title}
+      attachments: ${submission.attachments}
+    output:
+      normalized_text: string
+      summary: string
+      pii_flags: array
+      suggested_tags: array
+      region_guess: string
+
+  - id: embed
+    kind: embedding
+    model: your-embedding-model
+    input:
+      text: ${ingest_normalize.normalized_text}
+    output:
+      vector: float[]
+
+  - id: vector_search
+    kind: vector_search
+    index: problems.vector
+    input:
+      vector: ${embed.vector}
+      top_k: 8
+    output:
+      candidates: array # [{id, title, summary, score}]
+
+  - id: dedupe_compare
+    kind: llm
+    prompt_file: prompts/dedupe_compare.md
+    input:
+      normalized_text: ${ingest_normalize.normalized_text}
+      candidates: ${vector_search.candidates}
+    output:
+      action: string # one of: [merge, new, needs_human_review]
+      duplicates: array # candidate ids likely duplicates
+      notes: string
+
+  - id: score_opportunity
+    kind: llm
+    prompt_file: prompts/score_opportunity.md
+    input:
+      normalized_text: ${ingest_normalize.normalized_text}
+      signals:
+        region: ${submission.region}
+        tags: ${ingest_normalize.suggested_tags}
+        community_validation: ${submission.community_feedback}
+    output:
+      score: number # 0-100
+      rationale: string
+
+  - id: generate_opportunity_card
+    kind: llm
+    prompt_file: prompts/generate_opportunity_card.md
+    input:
+      normalized_text: ${ingest_normalize.normalized_text}
+      summary: ${ingest_normalize.summary}
+      tags: ${ingest_normalize.suggested_tags}
+      score: ${score_opportunity.score}
+      rationale: ${score_opportunity.rationale}
+      region: ${submission.region}
+    output_schema: schemas/opportunity_card.schema.json
+    output:
+      card: object
+
+  - id: moderation_gate
+    kind: human_review
+    input:
+      submission_id: ${submission.id}
+      card: ${generate_opportunity_card.card}
+      dedupe_action: ${dedupe_compare.action}
+    output:
+      approved: boolean
+      edits: object
+
+  - id: persist
+    kind: db_write
+    input:
+      table: problems
+      data:
+        canonical_text: ${ingest_normalize.normalized_text}
+        summary: ${ingest_normalize.summary}
+        tags: ${ingest_normalize.suggested_tags}
+        region_id: ${submission.region_id}
+        vector: ${embed.vector}
+        metadata:
+          opportunity_card: ${generate_opportunity_card.card}
+          evidence:
+            candidates: ${vector_search.candidates}
+            score_rationale: ${score_opportunity.rationale}
+        source_url: ${submission.source_url}
+        year: ${submission.year}
+        created_by: ${submission.created_by}
+        vetted: ${moderation_gate.approved}
+    conditions:
+      - ${moderation_gate.approved} == true
